@@ -1,0 +1,213 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://player/Ship.gd" type="Script" id=1]
+[ext_resource path="res://sprites/ship.png" type="Texture" id=2]
+[ext_resource path="res://effects/Fire.tscn" type="PackedScene" id=3]
+[ext_resource path="res://effects/Trail.tscn" type="PackedScene" id=4]
+
+[sub_resource type="PhysicsMaterial" id=41]
+friction = 0.5
+bounce = 0.2
+
+[sub_resource type="Animation" id=5]
+resource_name = "Down"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 6, 5, 4, 3, 2, 1 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "IdleDown"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "IdleRight"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "IdleUp"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=40]
+length = 0.001
+
+[sub_resource type="Animation" id=7]
+resource_name = "Right"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.0408909 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Up"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "Down"
+
+[sub_resource type="AnimationNodeAnimation" id=51]
+animation = "IdleRight"
+
+[sub_resource type="AnimationNodeAnimation" id=52]
+animation = "Up"
+
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "IdleRight"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=47]
+blend_point_0/node = SubResource( 50 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 51 )
+blend_point_1/pos = Vector2( 0.9, 0 )
+blend_point_2/node = SubResource( 52 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 53 )
+blend_point_3/pos = Vector2( -0.9, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachine" id=48]
+states/motion/node = SubResource( 47 )
+states/motion/position = Vector2( 348.273, 79.1818 )
+start_node = "motion"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=49]
+
+[node name="ship" type="RigidBody2D"]
+physics_material_override = SubResource( 41 )
+gravity_scale = 0.0
+script = ExtResource( 1 )
+
+[node name="trails" type="Node2D" parent="."]
+
+[node name="Trail" parent="trails" instance=ExtResource( 4 )]
+position = Vector2( -2, -4 )
+THICKNESS = 2.4
+
+[node name="Trail2" parent="trails" instance=ExtResource( 4 )]
+position = Vector2( -2, 4 )
+THICKNESS = 2.4
+
+[node name="Fire" parent="." instance=ExtResource( 3 )]
+emitting = false
+
+[node name="BackFire" parent="." instance=ExtResource( 3 )]
+emitting = false
+amount = 50
+lifetime = 0.3
+direction = Vector2( 1, 0 )
+spread = 12.0
+initial_velocity = 100.0
+scale_amount = 1.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 9
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Down = SubResource( 5 )
+anims/IdleDown = SubResource( 22 )
+anims/IdleRight = SubResource( 23 )
+anims/IdleUp = SubResource( 21 )
+anims/RESET = SubResource( 40 )
+anims/Right = SubResource( 7 )
+anims/Up = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 48 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 49 )
+parameters/motion/blend_position = Vector2( -0.00164175, 0.00379968 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 10, 0, -2, -8, -8, -5, -8, 5, -2, 8 )
+
+[node name="Tween" type="Tween" parent="."]
