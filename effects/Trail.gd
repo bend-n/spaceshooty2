@@ -9,6 +9,7 @@ var frame = 0
 
 var run = true
 
+
 func _physics_process(_delta):
 	if frame % 3 == 0:
 		points.push_front(global_position)

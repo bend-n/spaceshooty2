@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/localmultiplayer.png-e0d1c5835f92b78be08637e2d4bd1417.stex"
+path="res://.import/shield.png-2dd44654d4cd363eec180ee8ec5435a6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/localmultiplayer.png"
-dest_files=[ "res://.import/localmultiplayer.png-e0d1c5835f92b78be08637e2d4bd1417.stex" ]
+source_file="res://sprites/shield.png"
+dest_files=[ "res://.import/shield.png-2dd44654d4cd363eec180ee8ec5435a6.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

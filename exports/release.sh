@@ -1,6 +1,6 @@
 #!/bin/bash
 
-release_path=~/sokoban/exports
+release_path=$(pwd) # place script in release folder
 
 function download_and_push() {
     echo "Downloading $1"
@@ -13,14 +13,16 @@ function download_and_push() {
     fi
 }
 
-owner=bendnuts
-repository=sokoban
+cd .. || exit 1
+repository=$(basename $(pwd))
+echo $repository
+cd exports || exit 1
 
-path="https://github.com/$owner/$repository/releases/latest/download"
+path="https://github.com/bendnuts/$repository/releases/latest/download"
 
-itch_path=bendn/sokoban
+itch_path=bendn/$repository
 
-download_and_push "$path/Linux.zip" "$release_path/linux" "$itch_path" linux true
-download_and_push "$path/HTML.zip" "$release_path/html" "$itch_path" html
-download_and_push "$path/Windows.zip" "$release_path/windows" "$itch_path" windows
-download_and_push "$path/Mac.zip" "$release_path/mac" "$itch_path" mac
+download_and_push "$path/?inux.zip" "$release_path/linux" "$itch_path" linux true
+download_and_push "$path/(html|HTML).zip" "$release_path/html" "$itch_path" html
+download_and_push "$path/?indows.zip" "$release_path/windows" "$itch_path" windows
+download_and_push "$path/?ac.zip" "$release_path/mac" "$itch_path" mac

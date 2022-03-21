@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://player/Ship.gd" type="Script" id=1]
 [ext_resource path="res://sprites/ship.png" type="Texture" id=2]
 [ext_resource path="res://effects/Fire.tscn" type="PackedScene" id=3]
 [ext_resource path="res://effects/Trail.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/Stopwatch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sprites/shield.png" type="Texture" id=6]
 
 [sub_resource type="PhysicsMaterial" id=41]
 friction = 0.5
@@ -211,3 +213,18 @@ visible = false
 polygon = PoolVector2Array( 10, 0, -2, -8, -8, -5, -8, 5, -2, 8 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Stopwatch" parent="." instance=ExtResource( 5 )]
+
+[node name="shipui" type="CanvasLayer" parent="."]
+
+[node name="fuelbar" type="TextureProgress" parent="shipui"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 40.0
+margin_bottom = 40.0
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 6 )
+fill_mode = 4
+tint_under = Color( 0.780392, 0.352941, 0.352941, 0.54902 )
+tint_progress = Color( 0.466667, 1, 0.490196, 1 )
