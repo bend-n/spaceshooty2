@@ -13,6 +13,8 @@ font_data = ExtResource( 1 )
 pause_mode = 2
 layer = 3
 script = ExtResource( 2 )
+colors = [ Color( 1, 0.454902, 0.454902, 1 ), Color( 0.698039, 1, 0.301961, 1 ), Color( 0.396078, 0.615686, 1, 1 ), Color( 1, 0.815686, 0.266667, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+name_of_colors = [ "red", "green", "blue", "yellow", "white", "alpha" ]
 
 [node name="Label" type="Label" parent="."]
 anchor_top = 1.0
@@ -28,6 +30,5 @@ custom_fonts/font = SubResource( 1 )
 text = "foo bad"
 valign = 1
 autowrap = true
-percent_visible = 1.33333
 
 [node name="Tween" type="Tween" parent="."]

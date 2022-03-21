@@ -1,4 +1,4 @@
-extends Node
+extends Label
 class_name stopwatch
 
 var time_elapsed := 0.0
@@ -20,13 +20,13 @@ func get_time() -> float:
 
 func reset():
 	time_elapsed = 0.0
-	# text = _format_seconds(time_elapsed, true)
+	text = _format_seconds(time_elapsed, true)
 	set_on(false)
 
 
 func _process(delta):
 	time_elapsed += delta
-	# text = _format_seconds(time_elapsed, true)
+	text = _format_seconds(time_elapsed, true)
 
 
 func _format_seconds(time: float, use_milliseconds: bool) -> String:

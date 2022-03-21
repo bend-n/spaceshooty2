@@ -15,22 +15,24 @@ func Log(
 	new_text: String,
 	time := .5,
 	length := 2.5,
-	color_outline = Color.transparent,
-	color_text = Color.white
+	color_outline = "alpha",
+	color_text = "white"
 ):
 	if tween.is_active():
 		return false
-	label.add_color_override("font_color", color_text)
-	label.add_color_override("font_outline_modulate", color_outline)
+	var outline = colors[name_of_colors.find(color_outline)]
+	var text = colors[name_of_colors.find(color_text)]
+
+	label.add_color_override("font_color", text)
+	label.add_color_override("font_outline_modulate", outline)
 	label.percent_visible = 0
 	label.text = new_text
 	tween_(0, 1, time)
 	yield(tween, "tween_all_completed")
-	yield(get_tree().create_timer(length), "timeout")
-	tween_(1, 0, time)
+	tween_(1, 0, time, length)
 	return true
 
 
-func tween_(from, to, time):
-	tween.interpolate_property($Label, "percent_visible", from, to, time)
+func tween_(from, to, time, delay = 0):
+	tween.interpolate_property($Label, "percent_visible", from, to, time, tween.TRANS_LINEAR, tween.EASE_IN_OUT, delay)
 	tween.start()

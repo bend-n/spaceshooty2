@@ -1,10 +1,9 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://player/Ship.gd" type="Script" id=1]
 [ext_resource path="res://sprites/ship.png" type="Texture" id=2]
 [ext_resource path="res://effects/Fire.tscn" type="PackedScene" id=3]
 [ext_resource path="res://effects/Trail.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ui/Stopwatch.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sprites/shield.png" type="Texture" id=6]
 
 [sub_resource type="PhysicsMaterial" id=41]
@@ -204,7 +203,6 @@ anims/Up = SubResource( 4 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 48 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 49 )
 parameters/motion/blend_position = Vector2( -0.00164175, 0.00379968 )
 
@@ -213,8 +211,6 @@ visible = false
 polygon = PoolVector2Array( 10, 0, -2, -8, -8, -5, -8, 5, -2, 8 )
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="Stopwatch" parent="." instance=ExtResource( 5 )]
 
 [node name="shipui" type="CanvasLayer" parent="."]
 

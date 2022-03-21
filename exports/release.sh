@@ -2,27 +2,37 @@
 
 release_path=$(pwd) # place script in release folder
 
-function download_and_push() {
-    echo "Downloading $1"
-    wget $1 -q -P $2 &> /dev/null
-    butler push $2 $3:$4
-    if [[ -n $5 ]]; then
-        echo "not removing $4"
-    else
-        rm -rf "${2:?}/"*
-    fi
-}
-
 cd .. || exit 1
 repository=$(basename $(pwd))
-echo $repository
+echo "$repository"
 cd exports || exit 1
 
-path="https://github.com/bendnuts/$repository/releases/latest/download"
+url="https://github.com/bendnuts/$repository/releases/latest/download"
 
 itch_path=bendn/$repository
 
-download_and_push "$path/?inux.zip" "$release_path/linux" "$itch_path" linux true
-download_and_push "$path/(html|HTML).zip" "$release_path/html" "$itch_path" html
-download_and_push "$path/?indows.zip" "$release_path/windows" "$itch_path" windows
-download_and_push "$path/?ac.zip" "$release_path/mac" "$itch_path" mac
+function download_and_push() {
+    keep=$3
+    download_url=$url/$1
+    channel=$2
+    path="$release_path/$channel"
+    if [[ -n $keep ]]; then
+        rm -rf "${channel:?}/*"
+    fi
+    echo "Downloading $download_url"
+    wget "$download_url" -qP "$path" &> /dev/null
+    # butler push "$path" "$itch_path":"$channel"
+    if [[ -n $keep ]]; then
+        echo "not removing $channel"
+        atool -qX "$path" "$path/$1"
+        rm -rf "${path:?}/$1"
+    else
+        rm -rf "${channel:?}/$1"
+    fi
+}
+
+
+download_and_push "Linux.zip" linux keep
+download_and_push "HTML.zip" html
+download_and_push "Windows.zip" windows
+download_and_push "Mac.zip" mac
