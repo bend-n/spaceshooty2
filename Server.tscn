@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Server.gd" type="Script" id=1]
+
+[node name="Server" type="BulletServer"]
+max_lifetime = 20.0
+play_area_allow_incoming = true
+script = ExtResource( 1 )
